@@ -6,12 +6,12 @@
 #    By: lcabanes <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/07 19:50:49 by lcabanes          #+#    #+#              #
-#    Updated: 2018/04/15 19:16:38 by gquerre          ###   ########.fr        #
+#    Updated: 2018/04/15 19:26:25 by gquerre          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CFLAGS	+=		-Wall -Wextra -Werror
-CFLAGS	+=		./includes/
+CFLAGS	=		-Wall -Wextra -Werror
+INC		=		-I ./includes/
 
 NAME = libftprintf.a
 
@@ -186,7 +186,7 @@ OBJS = ft_memset.o\
 all: $(NAME)
 
 $(NAME): $(SRC)
-		gcc -I $(CFLAGS) -c $(SRCS)
+		gcc $(CFLAGS) $(INC) -c $(SRCS)
 			ar rc $(NAME) $(OBJS)
 				ranlib $(NAME)
 
