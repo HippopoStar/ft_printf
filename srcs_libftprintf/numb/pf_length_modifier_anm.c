@@ -6,7 +6,7 @@
 /*   By: lcabanes <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/11 16:04:41 by lcabanes          #+#    #+#             */
-/*   Updated: 2018/04/15 14:38:46 by lcabanes         ###   ########.fr       */
+/*   Updated: 2018/04/17 00:45:30 by lcabanes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,9 @@ size_t	pf_length_modifier_anm(va_list ap, char *c_s, t_pf *mai, ULLI *nb)
 	size_t	i;
 
 	i = 0;
-	if (pf_occurs(*(c_s + i), "ldiouxX"))
+	if (pf_occurs(*(c_s + i), "ldiouxXp"))
 	{
-		if (*(c_s + i) == 'l')
+		if (*(c_s + i) == 'l' || *(c_s + 0) == 'p')
 		{
 			i++;
 			if (*(c_s + i) == 'l')
