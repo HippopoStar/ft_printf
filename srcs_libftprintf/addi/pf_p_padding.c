@@ -6,7 +6,7 @@
 /*   By: lcabanes <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/14 13:01:39 by lcabanes          #+#    #+#             */
-/*   Updated: 2018/04/15 17:51:12 by lcabanes         ###   ########.fr       */
+/*   Updated: 2018/04/17 02:03:03 by lcabanes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@ void	pf_p_sharp_mark(char c, t_pf *mai)
 	i = 0;
 	while (*(mai->str + i) == ' ' || *(mai->str + i) == '0')
 		i++;
-	if (pf_occurs(c, "oxXO") && i != ft_strlen(mai->str))
+	if (pf_occurs(c, "oxXOp") && i != ft_strlen(mai->str))
 	{
 		if (i == 0)
 		{
 			if (c == 'o' || c == 'O')
 				pf_insert_a_string_in_another("0", mai, i);
-			else if (c == 'x')
+			else if (c == 'x' || c == 'p')
 				pf_insert_a_string_in_another("0x", mai, i);
 			else
 				pf_insert_a_string_in_another("0X", mai, i);
@@ -98,7 +98,7 @@ void	pf_p_padding(size_t retour, t_pf *mai, char minus_sign)
 	size_t	i;
 
 	if (!(blanks = (char *)malloc((retour + 1) * sizeof(char))))
-		pf_error_code("Erreur dans \"ft_printf\"");
+		pf_error_code("Erreur dans \"p_padding.c\\p_padding\"");
 	size = ft_strlen(mai->str);
 	if (retour > size)
 	{

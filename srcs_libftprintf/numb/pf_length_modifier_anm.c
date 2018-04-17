@@ -6,7 +6,7 @@
 /*   By: lcabanes <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/11 16:04:41 by lcabanes          #+#    #+#             */
-/*   Updated: 2018/04/17 00:45:30 by lcabanes         ###   ########.fr       */
+/*   Updated: 2018/04/17 01:53:09 by lcabanes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,9 @@ size_t	pf_length_modifier_anm(va_list ap, char *c_s, t_pf *mai, ULLI *nb)
 	size_t	i;
 
 	i = 0;
-	if (pf_occurs(*(c_s + i), "ldiouxXp"))
+	if (pf_occurs(*(c_s + i), "ldiouxX"))
 	{
-		if (*(c_s + i) == 'l' || *(c_s + 0) == 'p')
+		if (*(c_s + i) == 'l')
 		{
 			i++;
 			if (*(c_s + i) == 'l')
@@ -80,9 +80,13 @@ size_t	pf_length_modifier_anm(va_list ap, char *c_s, t_pf *mai, ULLI *nb)
 	{
 		i = pf_aux_lm_anm(ap, c_s, mai, nb);
 	}
+	else if (*(c_s + 0) == 'p')
+	{
+		*nb = (ULLI)va_arg(ap, void *);
+	}
 	else
 	{
-		pf_error_code("Erreur dans \"ft_printf\"");
+		pf_error_code("Erreur dans \"length_modifier_anm.c\\length_mod[...]\"");
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: lcabanes <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/12 01:52:41 by lcabanes          #+#    #+#             */
-/*   Updated: 2018/04/17 00:37:00 by lcabanes         ###   ########.fr       */
+/*   Updated: 2018/04/17 01:25:56 by lcabanes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,6 @@ void	pf_specify_base(char c, ULLI nb, t_pf *mai, ssize_t mnoz)
 	}
 	else
 	{
-		pf_error_code("Erreur dans \"ft_printf\"");
+		pf_error_code("Erreur dans \"specify_base.c\\specify_base\"");
 	}
 }
