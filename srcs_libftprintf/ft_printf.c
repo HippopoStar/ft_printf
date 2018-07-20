@@ -57,7 +57,7 @@ static int	pf_step_forward(const char *format, va_list ap, t_list *mai)
 	else
 	{
 		step = 0;
-		while (*(format + step) != '\0'
+		while (*(format + step) != '\0' && *(format + step) != '%'
 				&& !(pf_check_convers(format + step)
 					|| pf_check_color(format + step)))
 		{
