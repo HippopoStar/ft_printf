@@ -42,6 +42,14 @@ static int	pf_step_forward(const char *format, va_list ap, t_list *mai)
 	{
 		return (!(pf_convers(format, ap, mai) == -1) ? (int)step : -1);
 	}
+	else if (*(format + 0) == '%')
+	{
+		if (!(mai->content = (void *)malloc(2 * sizeof(char))))
+			return (-1);
+		*(((char *)mai->content) + 0) = '%';
+		*(((char *)mai->content) + 1) = '\0';
+		return (1);
+	}
 	else if ((step = pf_check_color(format)) != 0)
 	{
 		return (!(pf_color(format, mai) == -1) ? (int)step : -1);
@@ -53,8 +61,6 @@ static int	pf_step_forward(const char *format, va_list ap, t_list *mai)
 				&& !(pf_check_convers(format + step)
 					|| pf_check_color(format + step)))
 		{
-			if (*(format + step) == '%' && *(format + step + 1) == '%')
-				step++;
 			step++;
 		}
 		return ((mai->content = (void *)ft_strndup(format, step)) != NULL ?
