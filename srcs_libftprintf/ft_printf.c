@@ -48,7 +48,7 @@ static int	pf_step_forward(const char *format, va_list ap, t_list *mai)
 			return (-1);
 		*(((char *)mai->content) + 0) = '%';
 		*(((char *)mai->content) + 1) = '\0';
-		return (1);
+		return (2);
 	}
 	else if ((step = pf_check_color(format)) != 0)
 	{
