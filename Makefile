@@ -6,7 +6,7 @@
 #    By: lcabanes <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/07 19:50:49 by lcabanes          #+#    #+#              #
-#    Updated: 2018/04/17 01:36:30 by lcabanes         ###   ########.fr        #
+#    Updated: 2018/07/18 15:06:49 by lcabanes         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -76,28 +76,30 @@ SRCS = ./srcs_libft/ft_memset.c\
 		./srcs_libft/ft_lstiter.c\
 		./srcs_libft/ft_lstmap.c\
 		\
-		./srcs_libftprintf/glob/ft_printf.c\
-		./srcs_libftprintf/glob/pf_special_char.c\
-		./srcs_libftprintf/glob/pf_colors.c\
-		./srcs_libftprintf/glob/pf_flags.c\
-		./srcs_libftprintf/glob/pf_go_to_conv_flag.c\
-		./srcs_libftprintf/glob/pf_occurs.c\
-		./srcs_libftprintf/glob/pf_escape.c\
-		./srcs_libftprintf/glob/pf_error_code.c\
-		./srcs_libftprintf/char/pf_add_elem.c\
-		./srcs_libftprintf/char/pf_global_char_format.c\
-		./srcs_libftprintf/char/pf_add_unicode_string_mai.c\
-		./srcs_libftprintf/char/pf_add_unicode_char_mai.c\
-		./srcs_libftprintf/char/pf_complete_uni_array.c\
-		./srcs_libftprintf/numb/pf_length_modifier_anm.c\
-		./srcs_libftprintf/numb/pf_aux_lm_anm.c\
-		./srcs_libftprintf/numb/pf_specify_base.c\
-		./srcs_libftprintf/numb/pf_obsolete_convers.c\
-		./srcs_libftprintf/numb/pf_add_nb_mai.c\
-		./srcs_libftprintf/addi/pf_optionnal_flags.c\
-		./srcs_libftprintf/addi/pf_detect_mnoz.c\
-		./srcs_libftprintf/addi/pf_field_width_length.c\
-		./srcs_libftprintf/addi/pf_p_padding.c
+		./srcs_common_functions/get_next_line.c\
+		./srcs_common_functions/get_next_line_backslash_zero.c\
+		./srcs_common_functions/ft_putnbr_base.c\
+		./srcs_common_functions/ft_split_whitespaces.c\
+		./srcs_common_functions/ft_sqrt.c\
+		./srcs_common_functions/ft_hypotenuse.c\
+		./srcs_common_functions/ft_melt_colors.c\
+		./srcs_common_functions/ft_break_color_down.c\
+		./srcs_common_functions/ft_itoa_base.c\
+		./srcs_common_functions/ft_lli_and_ulli_toa_base.c\
+		./srcs_common_functions/ft_widestring_to_string.c\
+		./srcs_common_functions/ft_strndup.c\
+		\
+		./srcs_libftprintf/ft_printf.c\
+		./srcs_libftprintf/pf_check.c\
+		./srcs_libftprintf/pf_color.c\
+		./srcs_libftprintf/pf_convers.c\
+		./srcs_libftprintf/pf_get_prec_and_spac.c\
+		./srcs_libftprintf/pf_is_flag_present.c\
+		./srcs_libftprintf/pf_characters_convers.c\
+		./srcs_libftprintf/pf_deal_minus_sign_and_zero.c\
+		./srcs_libftprintf/pf_signed_convers.c\
+		./srcs_libftprintf/pf_unsigned_convers.c\
+		./srcs_libftprintf/pf_anticipate_sharp_mark.c
 
 OBJS = ft_memset.o\
 		ft_bzero.o\
@@ -160,32 +162,34 @@ OBJS = ft_memset.o\
 		ft_lstiter.o\
 		ft_lstmap.o\
 		\
+		get_next_line.o\
+		get_next_line_backslash_zero.o\
+		ft_putnbr_base.o\
+		ft_split_whitespaces.o\
+		ft_sqrt.o\
+		ft_hypotenuse.o\
+		ft_melt_colors.o\
+		ft_break_color_down.o\
+		ft_itoa_base.o\
+		ft_lli_and_ulli_toa_base.o\
+		ft_widestring_to_string.o\
+		ft_strndup.o\
+		\
 		ft_printf.o\
-		pf_special_char.o\
-		pf_colors.o\
-		pf_flags.o\
-		pf_go_to_conv_flag.o\
-		pf_occurs.o\
-		pf_escape.o\
-		pf_error_code.o\
-		pf_add_elem.o\
-		pf_global_char_format.o\
-		pf_add_unicode_string_mai.o\
-		pf_add_unicode_char_mai.o\
-		pf_complete_uni_array.o\
-		pf_specify_base.o\
-		pf_obsolete_convers.o\
-		pf_add_nb_mai.o\
-		pf_optionnal_flags.o\
-		pf_detect_mnoz.o\
-		pf_field_width_length.o\
-		pf_length_modifier_anm.o\
-		pf_aux_lm_anm.o\
-		pf_p_padding.o
+		pf_check.o\
+		pf_color.o\
+		pf_convers.o\
+		pf_get_prec_and_spac.o\
+		pf_is_flag_present.o\
+		pf_characters_convers.o\
+		pf_deal_minus_sign_and_zero.o\
+		pf_signed_convers.o\
+		pf_unsigned_convers.o\
+		pf_anticipate_sharp_mark.o
 
 all: $(NAME)
 
-$(NAME):
+$(NAME): $(SRCS)
 	gcc -c $(CFLAGS) $(SRCS)
 	ar rc $(NAME) $(OBJS)
 	ranlib $(NAME)

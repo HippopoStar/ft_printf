@@ -1,21 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_code.c                                       :+:      :+:    :+:   */
+/*   ft_sqrt.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lcabanes <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/03 23:59:07 by lcabanes          #+#    #+#             */
-/*   Updated: 2018/04/17 01:30:47 by lcabanes         ###   ########.fr       */
+/*   Created: 2018/07/08 05:06:23 by lcabanes          #+#    #+#             */
+/*   Updated: 2018/07/08 05:06:24 by lcabanes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-void	pf_error_code(char *error_message)
+/*
+** On a :
+** 46340^(2)	= 2 147 395 600
+** 46341^(2)	= 2 147 488 281
+*/
+
+int	ft_sqrt(int n)
 {
-	ft_putstr("Erreur dans \"ft_printf\" :\n");
-	ft_putstr(error_message);
-	ft_putchar('\n');
-	exit(-1);
+	int	i;
+	int	i_square;
+
+	if (n <= 0)
+	{
+		return (0);
+	}
+	else if (2147395600 <= n)
+	{
+		return (46340);
+	}
+	else
+	{
+		i = 1;
+		while ((i_square = i * i) <= n)
+		{
+			i++;
+		}
+		return (i - 1);
+	}
 }
