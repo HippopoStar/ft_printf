@@ -6,7 +6,7 @@
 /*   By: lcabanes <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/18 06:37:44 by lcabanes          #+#    #+#             */
-/*   Updated: 2018/07/18 12:23:16 by lcabanes         ###   ########.fr       */
+/*   Updated: 2018/07/22 20:18:20 by lcabanes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,7 @@ static int	pf_step_forward(const char *format, va_list ap, t_list *mai)
 	}
 	else if (*(format + 0) == '%')
 	{
-		if (!(mai->content = (void *)malloc(2 * sizeof(char))))
-			return (-1);
-		*(((char *)mai->content) + 0) = '%';
-		*(((char *)mai->content) + 1) = '\0';
-		return (2);
+		return (!(pf_add_const_string_mai("%", mai) == -1) ? 2 : -1);
 	}
 	else if ((step = pf_check_color(format)) != 0)
 	{
@@ -57,8 +53,8 @@ static int	pf_step_forward(const char *format, va_list ap, t_list *mai)
 	else
 	{
 		step = 0;
-		while (*(format + step) != '\0' && *(format + step) != '%'
-				&& !(pf_check_convers(format + step)
+		while (*(format + step) != '\0'
+				&& !(*(format + step) == '%'
 					|| pf_check_color(format + step)))
 		{
 			step++;
