@@ -11,14 +11,19 @@ cp -r /tmp/temporary_branche_algo_et_IA/projet_ft_printf/libftprintf/includes ./
 cp -r /tmp/temporary_branche_algo_et_IA/projet_ft_printf/libftprintf/srcs_libft ./
 cp -r /tmp/temporary_branche_algo_et_IA/projet_ft_printf/libftprintf/srcs_common_functions ./
 cp -r /tmp/temporary_branche_algo_et_IA/projet_ft_printf/libftprintf/srcs_libftprintf ./
-echo '\033[36m_____\033[00m'
-git status
-git add *
-echo '\033[36m_____\033[00m'
-git status
-git commit -m "Test de \"ft_printf\""
-echo '\033[36m_____\033[00m'
-git status
-git push
-echo '\033[36m_____\033[00m'
-git status
+
+rm -rf /tmp/temporary_ft_printf
+mkdir -p /tmp/temporary_ft_printf
+cp -r ./* /tmp/temporary_ft_printf/
+
+#echo '\033[36m_____\033[00m'
+#git status
+#git add *
+#echo '\033[36m_____\033[00m'
+#git status
+#git commit -m "Test de \"ft_printf\""
+#echo '\033[36m_____\033[00m'
+#git status
+#git push
+#echo '\033[36m_____\033[00m'
+#git status
