@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pf_characters_convers.c                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lcabanes <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/07/25 07:43:16 by lcabanes          #+#    #+#             */
+/*   Updated: 2018/07/26 02:33:18 by lcabanes         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libftprintf.h"
 
 /*
@@ -6,30 +18,11 @@
 
 static int	pf_string_convers(const char *format, va_list ap, t_list *mai)
 {
-	size_t	length;
-	size_t	prec;
-	size_t	spac;
 	char	*string;
 
-	if (!(string = va_arg(ap, char *)))
-		return (pf_add_const_string_mai("(null)", mai));
-	length = ft_strlen(string);
-	pf_get_prec_and_spac(format, &prec, &spac);
-	if (pf_is_flag_present(format, '.') && prec < length)
-	{
-		length = prec;
-	}
-	if (prec > length || spac > length)
-	{
-		spac = (prec > spac) ? prec : spac;
-		if (!(mai->content = (void *)pf_malloc_and_left_spaces(spac, length)))
-			return (-1);
-		ft_strncpy((((char *)mai->content) + spac - length), string, length);
-		*((char *)((mai->content) + spac + length)) = '\0';
-	}
-	else if (!(mai->content = (void *)ft_strdup(string)))
-		return (-1);
-	return (0);
+	return ((!(string = va_arg(ap, char *))) ?
+			pf_add_string_mai("(null)", mai, format)
+			: pf_add_string_mai(string, mai, format));
 }
 
 /*
@@ -38,15 +31,15 @@ static int	pf_string_convers(const char *format, va_list ap, t_list *mai)
 
 static int	pf_char_convers(const char *format, va_list ap, t_list *mai)
 {
-	size_t	prec;
-	size_t	spac;
+	size_t			prec;
+	size_t			spac;
 	unsigned char	c;
 
-	c = (unsigned char)va_arg(ap, int);
+	c = (!(pf_jump_to_conv_spec(format) == '%')) ?
+		(unsigned char)va_arg(ap, int) : '%';
 	pf_get_prec_and_spac(format, &prec, &spac);
-	if (prec > 1 || spac > 1)
+	if (spac > 1)
 	{
-		spac = (prec > spac) ? prec : spac;
 		if (!(mai->content = (void *)pf_malloc_and_left_spaces(spac, 1)))
 			return (-1);
 		*(((char *)mai->content) + spac - 1) = (char)c;
@@ -59,7 +52,7 @@ static int	pf_char_convers(const char *format, va_list ap, t_list *mai)
 		*(((char *)mai->content) + 1) = '\0';
 	}
 	if (c == '\0')
-		mai->content_size = (spac == 0) ? 1 : spac;
+		mai->content_size = (spac == 0) ? spac + 1 : spac;
 	return (0);
 }
 
@@ -75,12 +68,8 @@ static int	pf_widestring_convers(const char *format, va_list ap, t_list *mai)
 	size_t	spac;
 
 	if (!(widestring = va_arg(ap, wchar_t *)))
-		return (pf_add_const_string_mai("(null)", mai));
+		return (pf_add_string_mai("(null)", mai, format));
 	pf_get_prec_and_spac(format, &prec, &spac);
-	if (prec > spac)
-	{
-		spac = prec;
-	}
 	if (!(mai->content = (void *)ft_widestring_to_string(widestring, spac)))
 		return (-1);
 	length = 0;
@@ -108,14 +97,10 @@ static int	pf_widechar_convers(const char *format, va_list ap, t_list *mai)
 	*(widestring + 0) = (wchar_t)va_arg(ap, wint_t);
 	*(widestring + 1) = (wchar_t)L'\0';
 	pf_get_prec_and_spac(format, &prec, &spac);
-	if (prec > spac)
-	{
-		spac = prec;
-	}
 	if (!(mai->content = (void *)ft_widestring_to_string(widestring, spac)))
 		return (-1);
 	if (*(widestring + 0) == L'\0')
-		mai->content_size = (spac == 0) ? 1 : spac;
+		mai->content_size = (spac == 0) ? spac + 1 : spac;
 	return (0);
 }
 
@@ -123,7 +108,8 @@ static int	pf_widechar_convers(const char *format, va_list ap, t_list *mai)
 **	ft_putstr("Appel de \"pf_characters_convers\"\n");
 */
 
-int	pf_characters_convers(const char *format, va_list ap, t_list *mai, const char *type)
+int			pf_characters_convers(const char *format, va_list ap,\
+												t_list *mai, const char *type)
 {
 	int	wit;
 
@@ -132,7 +118,7 @@ int	pf_characters_convers(const char *format, va_list ap, t_list *mai, const cha
 	{
 		wit = pf_string_convers(format, ap, mai);
 	}
-	else if (*type == 'c')
+	else if (*type == 'c' || *type == '%')
 	{
 		wit = pf_char_convers(format, ap, mai);
 	}
